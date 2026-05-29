@@ -5,6 +5,7 @@ import time
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import csv
 
 import transformer.Constants as Constants
 import Utils
@@ -72,7 +73,7 @@ def train_epoch(model, training_data, optimizer, pred_loss_func, opt):
         loss = event_loss + pred_loss + se / scale_time_loss
         loss.backward()
 
-        """ update parameters """
+        """ update and print parameters """
         optimizer.step()
 
         """ note keeping """
@@ -135,10 +136,38 @@ def train(model, training_data, validation_data, optimizer, scheduler, pred_loss
 
         start = time.time()
         train_event, train_type, train_time = train_epoch(model, training_data, optimizer, pred_loss_func, opt)
+
+        # save trainable parameters as csv file for the final epoch.
+        if epoch == opt.epoch:
+
+            csv_rows = []
+
+            for name, param in model.named_parameters():
+                if param.requires_grad and param.grad is not None:
+
+                    csv_rows.append([
+                        name,
+                        str(tuple(param.shape)),
+                        param.data.norm().item()
+                    ])
+
+            with open("trainable_parameters.csv", "w", newline="") as f:
+                writer = csv.writer(f)
+
+                writer.writerow([
+                    "parameter_name",
+                    "parameter_shape",
+                    "data_norm"
+                ])
+
+                writer.writerows(csv_rows)
+
+            print("\n[Info] Saved final epoch parameters to trainable_parameters.csv")
+
         print('  - (Training)    loglikelihood: {ll: 8.5f}, '
-              'accuracy: {type: 8.5f}, RMSE: {rmse: 8.5f}, '
-              'elapse: {elapse:3.3f} min'
-              .format(ll=train_event, type=train_type, rmse=train_time, elapse=(time.time() - start) / 60))
+            'accuracy: {type: 8.5f}, RMSE: {rmse: 8.5f}, '
+            'elapse: {elapse:3.3f} min'
+            .format(ll=train_event, type=train_type, rmse=train_time, elapse=(time.time() - start) / 60))
 
         start = time.time()
         valid_event, valid_type, valid_time = eval_epoch(model, validation_data, pred_loss_func, opt)

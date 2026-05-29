@@ -1,0 +1,66 @@
+parameter_name,parameter_shape,data_norm
+alpha,(),1.9130001068115234
+beta,(),0.1648261696100235
+encoder.event_emb.weight,"(6, 512)",49.56270217895508
+encoder.layer_stack.0.slf_attn.w_qs.weight,"(2048, 512)",30.439619064331055
+encoder.layer_stack.0.slf_attn.w_ks.weight,"(2048, 512)",30.69476318359375
+encoder.layer_stack.0.slf_attn.w_vs.weight,"(2048, 512)",30.250629425048828
+encoder.layer_stack.0.slf_attn.fc.weight,"(512, 2048)",30.556137084960938
+encoder.layer_stack.0.slf_attn.fc.bias,"(512,)",0.5485855937004089
+encoder.layer_stack.0.slf_attn.layer_norm.weight,"(512,)",22.538616180419922
+encoder.layer_stack.0.slf_attn.layer_norm.bias,"(512,)",0.5626790523529053
+encoder.layer_stack.0.pos_ffn.w_1.weight,"(1024, 512)",20.641738891601562
+encoder.layer_stack.0.pos_ffn.w_1.bias,"(1024,)",0.9034004807472229
+encoder.layer_stack.0.pos_ffn.w_2.weight,"(512, 1024)",17.16434669494629
+encoder.layer_stack.0.pos_ffn.w_2.bias,"(512,)",0.6149701476097107
+encoder.layer_stack.0.pos_ffn.layer_norm.weight,"(512,)",21.532480239868164
+encoder.layer_stack.0.pos_ffn.layer_norm.bias,"(512,)",1.2752093076705933
+encoder.layer_stack.1.slf_attn.w_qs.weight,"(2048, 512)",32.24550247192383
+encoder.layer_stack.1.slf_attn.w_ks.weight,"(2048, 512)",31.574193954467773
+encoder.layer_stack.1.slf_attn.w_vs.weight,"(2048, 512)",29.33312225341797
+encoder.layer_stack.1.slf_attn.fc.weight,"(512, 2048)",29.77113914489746
+encoder.layer_stack.1.slf_attn.fc.bias,"(512,)",1.0004525184631348
+encoder.layer_stack.1.slf_attn.layer_norm.weight,"(512,)",22.321243286132812
+encoder.layer_stack.1.slf_attn.layer_norm.bias,"(512,)",1.018216848373413
+encoder.layer_stack.1.pos_ffn.w_1.weight,"(1024, 512)",20.697494506835938
+encoder.layer_stack.1.pos_ffn.w_1.bias,"(1024,)",0.8822840452194214
+encoder.layer_stack.1.pos_ffn.w_2.weight,"(512, 1024)",18.058345794677734
+encoder.layer_stack.1.pos_ffn.w_2.bias,"(512,)",0.6568142175674438
+encoder.layer_stack.1.pos_ffn.layer_norm.weight,"(512,)",21.486961364746094
+encoder.layer_stack.1.pos_ffn.layer_norm.bias,"(512,)",1.3436031341552734
+encoder.layer_stack.2.slf_attn.w_qs.weight,"(2048, 512)",34.07286071777344
+encoder.layer_stack.2.slf_attn.w_ks.weight,"(2048, 512)",32.53355407714844
+encoder.layer_stack.2.slf_attn.w_vs.weight,"(2048, 512)",29.36944007873535
+encoder.layer_stack.2.slf_attn.fc.weight,"(512, 2048)",28.93681526184082
+encoder.layer_stack.2.slf_attn.fc.bias,"(512,)",1.0985746383666992
+encoder.layer_stack.2.slf_attn.layer_norm.weight,"(512,)",22.444805145263672
+encoder.layer_stack.2.slf_attn.layer_norm.bias,"(512,)",0.6543049812316895
+encoder.layer_stack.2.pos_ffn.w_1.weight,"(1024, 512)",21.391889572143555
+encoder.layer_stack.2.pos_ffn.w_1.bias,"(1024,)",0.8531821966171265
+encoder.layer_stack.2.pos_ffn.w_2.weight,"(512, 1024)",17.27981948852539
+encoder.layer_stack.2.pos_ffn.w_2.bias,"(512,)",0.5829755067825317
+encoder.layer_stack.2.pos_ffn.layer_norm.weight,"(512,)",21.715389251708984
+encoder.layer_stack.2.pos_ffn.layer_norm.bias,"(512,)",1.1076151132583618
+encoder.layer_stack.3.slf_attn.w_qs.weight,"(2048, 512)",31.73754119873047
+encoder.layer_stack.3.slf_attn.w_ks.weight,"(2048, 512)",31.36308479309082
+encoder.layer_stack.3.slf_attn.w_vs.weight,"(2048, 512)",29.05763816833496
+encoder.layer_stack.3.slf_attn.fc.weight,"(512, 2048)",28.4639892578125
+encoder.layer_stack.3.slf_attn.fc.bias,"(512,)",0.580559253692627
+encoder.layer_stack.3.slf_attn.layer_norm.weight,"(512,)",22.466405868530273
+encoder.layer_stack.3.slf_attn.layer_norm.bias,"(512,)",0.4027250111103058
+encoder.layer_stack.3.pos_ffn.w_1.weight,"(1024, 512)",21.555267333984375
+encoder.layer_stack.3.pos_ffn.w_1.bias,"(1024,)",0.8883722424507141
+encoder.layer_stack.3.pos_ffn.w_2.weight,"(512, 1024)",16.498104095458984
+encoder.layer_stack.3.pos_ffn.w_2.bias,"(512,)",0.47131794691085815
+encoder.layer_stack.3.pos_ffn.layer_norm.weight,"(512,)",21.905275344848633
+encoder.layer_stack.3.pos_ffn.layer_norm.bias,"(512,)",0.154013529419899
+linear.weight,"(5, 512)",8.16823673248291
+linear.bias,"(5,)",0.05932212620973587
+rnn.rnn.weight_ih_l0,"(256, 512)",26.64470100402832
+rnn.rnn.weight_hh_l0,"(256, 64)",13.437265396118164
+rnn.rnn.bias_ih_l0,"(256,)",1.1921441555023193
+rnn.rnn.bias_hh_l0,"(256,)",1.0584726333618164
+rnn.projection.weight,"(512, 64)",14.811894416809082
+rnn.projection.bias,"(512,)",1.667771577835083
+time_predictor.linear.weight,"(1, 512)",1.4104971885681152
+type_predictor.linear.weight,"(5, 512)",2.990483522415161

@@ -1,6 +1,2 @@
-data/
-log/
-
-__pycache__/
-.idea/
-
+data_hawkes/
+*.pkldata_hawkes/ 
