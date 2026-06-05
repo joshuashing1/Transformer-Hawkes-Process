@@ -5,6 +5,7 @@ import time
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import os
 import csv
 
 import transformer.Constants as Constants
@@ -137,32 +138,52 @@ def train(model, training_data, validation_data, optimizer, scheduler, pred_loss
         start = time.time()
         train_event, train_type, train_time = train_epoch(model, training_data, optimizer, pred_loss_func, opt)
 
-        # save trainable parameters as csv file for the final epoch.
+        # save trainable parameters in individual csv files for the final epoch.
         if epoch == opt.epoch:
 
-            csv_rows = []
+            output_dir = "trainable_parameters"
+            os.makedirs(output_dir, exist_ok=True)
 
             for name, param in model.named_parameters():
-                if param.requires_grad and param.grad is not None:
 
-                    csv_rows.append([
-                        name,
-                        str(tuple(param.shape)),
-                        param.data.norm().item()
-                    ])
+                if param.requires_grad:
 
-            with open("trainable_parameters.csv", "w", newline="") as f:
-                writer = csv.writer(f)
+                    # convert parameter tensor to numpy
+                    values = param.detach().cpu().numpy()
 
-                writer.writerow([
-                    "parameter_name",
-                    "parameter_shape",
-                    "data_norm"
-                ])
+                    # create safe filename
+                    filename = name.replace(".", "_") + ".csv"
+                    filepath = os.path.join(output_dir, filename)
 
-                writer.writerows(csv_rows)
+                    # scalar parameter (alpha, beta)
+                    if values.ndim == 0:
 
-            print("\n[Info] Saved final epoch parameters to trainable_parameters.csv")
+                        with open(filepath, "w", newline="") as f:
+                            writer = csv.writer(f)
+                            writer.writerow(["value"])
+                            writer.writerow([float(values)])
+
+                    # vector parameter (biases, layernorm weights, etc.)
+                    elif values.ndim == 1:
+
+                        np.savetxt(
+                            filepath,
+                            values.reshape(1, -1),
+                            delimiter=","
+                        )
+
+                    # matrix parameter (most weights)
+                    else:
+
+                        np.savetxt(
+                            filepath,
+                            values,
+                            delimiter=","
+                        )
+
+            print("\n[Info] Saved final epoch parameters to folder "
+                "'trainable_parameters'"
+            )
 
         print('  - (Training)    loglikelihood: {ll: 8.5f}, '
             'accuracy: {type: 8.5f}, RMSE: {rmse: 8.5f}, '
