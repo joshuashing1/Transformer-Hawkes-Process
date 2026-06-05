@@ -159,16 +159,24 @@ def train(model, training_data, validation_data, optimizer, scheduler, pred_loss
 
                         with open(filepath, "w", newline="") as f:
                             writer = csv.writer(f)
+                            writer.writerow(["shape", str(tuple(param.shape))])
                             writer.writerow(["value"])
                             writer.writerow([float(values)])
 
                     # vector parameters
                     elif values.ndim == 1:
-                        np.savetxt(filepath, values.reshape(1, -1), delimiter=",")
+                        with open(filepath, "w", newline="") as f:
+                            writer = csv.writer(f)
+                            writer.writerow(["shape", str(tuple(param.shape))])
+                            for v in values:
+                                writer.writerow([v])
 
                     # matrix parameters
                     else:
-                        np.savetxt(filepath, values, delimiter=",")
+                        with open(filepath, "w", newline="") as f:
+                            writer = csv.writer(f)
+                            writer.writerow(["shape", str(tuple(param.shape))])
+                            writer.writerows(values)
 
             print("\n[Info] Saved final epoch parameters to folder "
                 "'trainable_parameters'"
