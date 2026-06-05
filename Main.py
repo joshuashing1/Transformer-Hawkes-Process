@@ -151,11 +151,10 @@ def train(model, training_data, validation_data, optimizer, scheduler, pred_loss
                     # convert parameter tensor to numpy
                     values = param.detach().cpu().numpy()
 
-                    # create safe filename
                     filename = name.replace(".", "_") + ".csv"
                     filepath = os.path.join(output_dir, filename)
 
-                    # scalar parameter (alpha, beta)
+                    # scalar parameters
                     if values.ndim == 0:
 
                         with open(filepath, "w", newline="") as f:
@@ -163,23 +162,13 @@ def train(model, training_data, validation_data, optimizer, scheduler, pred_loss
                             writer.writerow(["value"])
                             writer.writerow([float(values)])
 
-                    # vector parameter (biases, layernorm weights, etc.)
+                    # vector parameters
                     elif values.ndim == 1:
+                        np.savetxt(filepath, values.reshape(1, -1), delimiter=",")
 
-                        np.savetxt(
-                            filepath,
-                            values.reshape(1, -1),
-                            delimiter=","
-                        )
-
-                    # matrix parameter (most weights)
+                    # matrix parameters
                     else:
-
-                        np.savetxt(
-                            filepath,
-                            values,
-                            delimiter=","
-                        )
+                        np.savetxt(filepath, values, delimiter=",")
 
             print("\n[Info] Saved final epoch parameters to folder "
                 "'trainable_parameters'"
