@@ -159,6 +159,9 @@ class Transformer(nn.Module):
 
         # parameter for the softplus function
         self.beta = nn.Parameter(torch.tensor(1.0))
+        
+        # parameter for the claim size
+        self.gamma = nn.Parameter(torch.tensor(1.0))
 
         # OPTIONAL recurrent layer, this sometimes helps
         self.rnn = RNN_layers(d_model, d_rnn)
